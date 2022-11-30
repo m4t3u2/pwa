@@ -1,0 +1,57 @@
+[
+  {
+    "categoria": "Action Figures",
+    "brinquedos": [
+      {
+        "nome": "Ichigo",
+        "imagem": "imgs/toy_001.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 150,00"
+      },
+      {
+        "nome": "Batman",
+        "imagem": "imgs/toy_002.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 100,00"
+      },
+      {
+        "nome": "Illidan",
+        "imagem": "imgs/toy_003.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 350,00"
+      }
+    ]
+  },
+  {
+    "categoria": "Veículos",
+    "brinquedos": [
+      {
+        "nome": "Ichigo",
+        "imagem": "imgs/toy_001.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 55,00"
+      },
+      {
+        "nome": "Batman",
+        "imagem": "imgs/toy_002.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 50,00"
+      }
+    ]
+  },
+  {
+    "categoria": "Pelucia",
+    "brinquedos": [
+      {
+        "nome": "Ichigo",
+        "imagem": "imgs/toy_001.png",
+        "whatsapp": "14997216103",
+        "valor": "R$ 15,00"
+      }
+    ]
+  },
+  {
+    "categoria": "Categoria sem brinquedos",
+    "brinquedos": []
+  }
+]
