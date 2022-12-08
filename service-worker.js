@@ -45,3 +45,17 @@ self.addEventListener("activate", (evt) => {
   );
   self.clients.claim();
 });
+
+// Responder página offline do app
+self.addEventListener("fetch", (evt) => {
+  if (evt.request.mode !== "navigate") {
+    return;
+  }
+  evt.respondWith(
+    fetch(evt.request).catch(() => {
+      return caches.open(CACHE_NAME).then((cache) => {
+        return cache.match("offline.html");
+      });
+    })
+  );
+});

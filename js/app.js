@@ -38,6 +38,7 @@ ajax.onreadystatechange = function () {
         }
       }
       content.innerHTML = html_content;
+      cache_dinamico(data_json);
     }
   }
 };
@@ -46,3 +47,51 @@ ajax.onreadystatechange = function () {
 var card_brinquedo = function (nome, imagem, valor, whatsapp) {
   return `<div class="col-lg-6"> <div class="card"> <img src="${imagem}" class="card-img-top" alt="Brinquedo 1" /> <div class="card-body"> <h5 class="card-title">${nome}</h5> <p class="card-text"><strong>Valor: </strong>${valor}</p> <div class="d-grid gap-2"> <a href="https://api.whatsapp.com/send?phone=55${whatsapp}&text=Olá, gostaria de informações sobre o brinquedo ${nome}." target="_blank" class="btn btn-info">Contato Proprietário</a> </div> </div> </div> </div>`;
 };
+
+// Construir o cahce dinâmico
+var cache_dinamico = function (data_json) {
+  if ("caches" in window) {
+    console.log("Deletando cache dinâmico antigo.");
+    caches.delete("brinquedo-app-dinamico").then(function () {
+      if (data_json.length > 0) {
+        var files = ["dados.json"];
+        for (let i = 0; i < data_json.length; i++) {
+          for (let j = 0; j < data_json[i].brinquedos.length; j++) {
+            if (files.indexOf(data_json[i].brinquedos[j].imagem) == -1) {
+              files.push(data_json[i].brinquedos[j].imagem);
+            }
+          }
+        }
+      }
+      caches.open("brinquedo-app-dinamico").then(function (cache) {
+        cache.addAll(files).then(function () {
+          console.log("Novo cache dinâmico adicionado.");
+        });
+      });
+    });
+  }
+};
+
+// Botão de instalação
+let disparoInstalacao = null;
+const btInstall = document.getElementById("btInstall");
+
+let inicializarInstalacao = function(){
+  btInstall.removeAttribute("hidden");
+  btInstall.addEventListener("click", function(){
+    disparoInstalacao.prompt();
+    disparoInstalacao.userChoice.then((choice) => {
+      if (choice.outcome === "accepted") {
+        console.log("Usuário realizou a instalação.");
+      } else {
+        console.log("Usuário não realizou a instalação.");
+      }
+    });
+  });
+};
+
+window.addEventListener("beforeinstallprompt", gravarDisparo);
+
+function gravarDisparo(evt) {
+  disparoInstalacao = evt;
+}
